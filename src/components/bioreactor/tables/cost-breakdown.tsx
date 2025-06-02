@@ -58,7 +58,7 @@ const ExpenseTable = ({ expenses }: ExpenseTableProps) => {
   return (
     <div className='h-full flex flex-col pb-2'>
       <div className='flex items-center justify-start gap-x-2 mb-4'>
-        <Title title={"Expense Breakdown"} />
+        <Title title={"Cost Breakdown"} />
         <TableDownloadButton
           filename='expense-breakdown.csv'
           headers={["Category", "Cost", "Percentage"]}

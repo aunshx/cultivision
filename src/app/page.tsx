@@ -1,14 +1,14 @@
 "use client";
 
-import BioreactorBarChart from "@/components/bioreactor/charts/cost-breakdown";
+import BioreactorChart from "@/components/bioreactor/charts/cost-distribution";
 import LaborCostAnnualGraph from "@/components/bioreactor/charts/labor-cost-annual";
 import LaborCostHourlyGraph from "@/components/bioreactor/charts/labor-cost-hourly";
 import FlowDiagram from "@/components/bioreactor/flow-diagram";
 import ParameterForm from "@/components/bioreactor/form";
 import ImageModal from "@/components/bioreactor/image-modal";
-import ExpenseTable from "@/components/bioreactor/tables/expense-breakdown";
+import ExpenseTable from "@/components/bioreactor/tables/cost-breakdown";
 import LaborCostTable from "@/components/bioreactor/tables/labor-cost";
-import MetricsTable from "@/components/bioreactor/tables/performance-metrics";
+import MetricsTable from "@/components/bioreactor/tables/summary";
 import Container from "@/components/container";
 import Footer from "@/components/footer";
 import Toast from "@/components/toast";
@@ -93,8 +93,11 @@ const Home = () => {
         <div className='w-full lg:w-3/4 lg:ml-[25%] pt-5 px-0 lg:p-4 overflow-y-auto'>
           <div className='flex flex-col gap-4'>
             <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
-              <Container>
+              {/* <Container>
                 <BioreactorBarChart expenses={expenses} />
+              </Container> */}
+              <Container>
+                <BioreactorChart expenses={expenses} />
               </Container>
               <Container>
                 <ExpenseTable expenses={expenses} />
@@ -102,9 +105,6 @@ const Home = () => {
             </div>
 
             <div className='grid grid-cols-1 gap-4'>
-              {/* <Container>
-                <BioreactorChart expenses={expenses} />
-              </Container> */}
               <Container className='h-full'>
                 <MetricsTable expenses={expenses} />
               </Container>
