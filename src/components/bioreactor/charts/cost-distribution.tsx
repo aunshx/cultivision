@@ -136,7 +136,7 @@ const BioreactorChart = ({ expenses }: BioreactorChartProps) => {
   );
 
   return (
-    <div className='h-full flex flex-col pb-2 gap-4'>
+    <div className='h-full flex flex-col pb-2'>
       <div className='flex justify-between items-start w-full'>
         <div className='flex gap-x-2'>
           <Title title={"Cost Distribution"} />
@@ -156,7 +156,7 @@ const BioreactorChart = ({ expenses }: BioreactorChartProps) => {
       <div
         className='flex-1 relative'
         aria-label='Doughnut chart showing percentage distribution of operational expenses'
-        style={{ minHeight: "300px" }}
+        style={{ minHeight: "300px"}}
       >
         <canvas ref={chartRef} className='w-full h-full' />
       </div>
