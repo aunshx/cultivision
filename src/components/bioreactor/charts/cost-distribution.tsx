@@ -65,10 +65,10 @@ const BioreactorChart = ({ expenses }: BioreactorChartProps) => {
     const data = {
       labels: [
         `Media (${percentages.media.toFixed(1)}%)`,
-        `Raw Materials (${percentages.otherMaterials.toFixed(1)}%)`,
+        `Other Raw Materials (${percentages.otherMaterials.toFixed(1)}%)`,
         `Labor (${percentages.labor.toFixed(1)}%)`,
         `Waste (${percentages.waste.toFixed(1)}%)`,
-        `Facility (${percentages.facility.toFixed(1)}%)`,
+        `Facility Dependent Cost (${percentages.facility.toFixed(1)}%)`,
         `Consumables (${percentages.consumables.toFixed(1)}%)`,
         `Utilities (${percentages.utilities.toFixed(1)}%)`,
       ],
@@ -99,21 +99,21 @@ const BioreactorChart = ({ expenses }: BioreactorChartProps) => {
         maintainAspectRatio: false,
         layout: {
           padding: {
-            top: 0,
+            top: 20,
             right: 0,
-            bottom: 0,
-            left: 10,
+            bottom: 20,
+            left: 0,
           },
         },
         plugins: {
           legend: {
-            position: "right",
+            position: "bottom",
             align: "center",
             labels: {
-              padding: 10,
+              padding: 15,
               boxWidth: 12,
               font: {
-                size: 11,
+                size: 12,
               },
             },
           },
@@ -136,7 +136,7 @@ const BioreactorChart = ({ expenses }: BioreactorChartProps) => {
   );
 
   return (
-    <div className='h-full flex flex-col pb-2 gap-4'>
+    <div className='h-full flex flex-col pb-2'>
       <div className='flex justify-between items-start w-full'>
         <div className='flex gap-x-2'>
           <Title title={"Cost Distribution"} />
@@ -156,7 +156,7 @@ const BioreactorChart = ({ expenses }: BioreactorChartProps) => {
       <div
         className='flex-1 relative'
         aria-label='Doughnut chart showing percentage distribution of operational expenses'
-        style={{ minHeight: "300px" }}
+        style={{ minHeight: "300px"}}
       >
         <canvas ref={chartRef} className='w-full h-full' />
       </div>

@@ -1,14 +1,14 @@
 "use client";
 
-import BioreactorBarChart from "@/components/bioreactor/charts/cost-breakdown";
+import BioreactorChart from "@/components/bioreactor/charts/cost-distribution";
 import LaborCostAnnualGraph from "@/components/bioreactor/charts/labor-cost-annual";
 import LaborCostHourlyGraph from "@/components/bioreactor/charts/labor-cost-hourly";
 import FlowDiagram from "@/components/bioreactor/flow-diagram";
 import ParameterForm from "@/components/bioreactor/form";
 import ImageModal from "@/components/bioreactor/image-modal";
-import ExpenseTable from "@/components/bioreactor/tables/expense-breakdown";
+import ExpenseTable from "@/components/bioreactor/tables/cost-breakdown";
 import LaborCostTable from "@/components/bioreactor/tables/labor-cost";
-import MetricsTable from "@/components/bioreactor/tables/performance-metrics";
+import MetricsTable from "@/components/bioreactor/tables/summary";
 import Container from "@/components/container";
 import Footer from "@/components/footer";
 import Toast from "@/components/toast";
@@ -62,9 +62,11 @@ const Home = () => {
 
   return (
     <main className='min-h-screen'>
-      <div className='flex flex-col lg:flex-row h-full pt-18 mx-8 gap-2'>
+      <div
+        className='flex flex-col lg:flex-row h-full pt-18 gap-2'
+      >
         <div
-          className='w-full lg:w-1/4 pt-6 px-0 lg:p-4 lg:pb-24 lg:h-full lg:overflow-y-auto lg:fixed lg:left-4 lg:top-18 flex flex-col md:items-center md:justify-start gap-6'
+          className='w-full lg:w-1/4 pt-6 px-0 lg:p lg:pb-24 lg:h-full lg:overflow-y-auto lg:fixed lg:left-4 lg:top-16 flex flex-col md:items-center md:justify-start gap-6 mr-2'
           aria-label='Input Form and Bioreactor View'
         >
           <div className='bg-white rounded-lg shadow-md p-4 border border-solid border-gray-100 lg:w-full'>
@@ -90,11 +92,14 @@ const Home = () => {
           </div>
         </div>
 
-        <div className='w-full lg:w-3/4 lg:ml-[25%] pt-5 px-0 lg:p-4 overflow-y-auto'>
+        <div className='w-full lg:w-3/4 lg:ml-[26%] pt-5 px-0 lg:p-4 overflow-y-auto'>
           <div className='flex flex-col gap-4'>
             <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
-              <Container>
+              {/* <Container>
                 <BioreactorBarChart expenses={expenses} />
+              </Container> */}
+              <Container>
+                <BioreactorChart expenses={expenses} />
               </Container>
               <Container>
                 <ExpenseTable expenses={expenses} />
@@ -102,9 +107,6 @@ const Home = () => {
             </div>
 
             <div className='grid grid-cols-1 gap-4'>
-              {/* <Container>
-                <BioreactorChart expenses={expenses} />
-              </Container> */}
               <Container className='h-full'>
                 <MetricsTable expenses={expenses} />
               </Container>
@@ -126,7 +128,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <div className='lg:hidden w-full flex justify-center items-center'>
+        <div className='mb-8 lg:mb-0 lg:hidden w-full flex justify-center items-center'>
           <div className='bg-white rounded-lg shadow-md p-4 border border-solid border-gray-100 w-96'>
             <Footer />
           </div>

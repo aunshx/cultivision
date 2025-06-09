@@ -214,7 +214,7 @@ const ParameterForm = () => {
                     )}
                     placeholder='0.00'
                     step={param.step}
-                    min='0'
+                    min={0}
                     aria-describedby={`${param.id}-desc`}
                   />
                   <div
@@ -268,7 +268,7 @@ const ParameterForm = () => {
                     )}
                     placeholder='0.00'
                     step={param.step}
-                    min='0'
+                    min={0}
                     aria-describedby={`${param.id}-desc`}
                   />
                   <div

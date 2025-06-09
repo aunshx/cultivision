@@ -6,18 +6,20 @@ export const bioreactors: Bioreactor[] = [
     name: "42,000 L Stirred Tank",
     image: "/images/40K_STR.png",
     annualProduction: 4003226,
-    mediaVolume: 40732424,
-    baseLaborCost: 722 * 34.5 + 24076 * 46.0 + 261 * 57.5,
-    otherMaterialsCost: 2519278,
-    wasteTreatmentCost: 697000,
-    facilityCosts: 77202000,
+    capitalExpense: 437200000,
     consumableCosts: 123000,
-    powerUsage: 8790694,
+    wasteTreatmentCost: 697000,
     steamUsage: 22166,
     coolingWaterUsage: 1944436,
     chilledWaterUsage: 89448,
-    capitalExpense: 437200000,
+    powerUsage: 8790694,
+    mediaVolume: 40732424,
+    facilityCosts: 77202000,
+    otherMaterialsCost: 2519278,
+    // TODO: Change the below from a ratio to the cost directly as given in the csv
     depreciation: 5.14,
+
+    baseLaborCost: 722 * 34.5 + 24076 * 46.0 + 261 * 57.5,
   },
   {
     id: "210K_STR",
@@ -36,6 +38,25 @@ export const bioreactors: Bioreactor[] = [
     chilledWaterUsage: 89448,
     capitalExpense: 1172900000,
     depreciation: 9.76,
+    // reactors: {
+    //   '17h': {
+    //     '100gpl': {
+
+    //     },
+    //   },
+    //   '20h': {
+    //     '100gpl': {},
+    //   },
+    //   '23h': {
+    //     '100gpl': {},
+    //   },
+    //   '26h': {
+    //     '100gpl': {},
+    //   },
+    //   '29h': {
+    //     '100gpl': {},
+    //   },
+    // },
   },
   {
     id: "260K_ALR",
@@ -43,17 +64,60 @@ export const bioreactors: Bioreactor[] = [
     image: "/images/260K_ALR.png",
     annualProduction: 25000000,
     mediaVolume: 253758783,
-    baseLaborCost: 2756 * 34.5 + 20353 * 46.0 + 261 * 57.5,
     otherMaterialsCost: 5464682,
-    wasteTreatmentCost: 3034484,
-    facilityCosts: 59461000,
-    consumableCosts: 246000,
     powerUsage: 3116542,
     steamUsage: 27232,
     coolingWaterUsage: 1263320,
     chilledWaterUsage: 110527,
+    consumableCosts: 246000,
+    wasteTreatmentCost: 3034484,
+    facilityCosts: 59461000,
+
+    baseLaborCost: 2756 * 34.5 + 20353 * 46.0 + 261 * 57.5,
+
     capitalExpense: 365900000,
+
     depreciation: 1.2,
+    // reactors: {
+    //   "17h": {
+    //     "100gpl": {},
+    //   },
+    //   "20h": {
+    //     "100gpl": {},
+    //   },
+    //   "23h": {
+    //     "100gpl": {
+    //       // Executive Summary - Cost Basis Annual Rate
+    //       annualProduction: 25000000,
+    //       // Executive Summary - Total Capital Investment
+    //       capitalExpense: 345079000,
+    //       // 5. MATERIALS COST - PROCESS SUMMARY - Annual Amount - Beefy R Enhance (MEDIA COST - Part of Cost Parameters)
+    //       mediaVolume: 253758783,
+    //       // MATERIALS COST - PROCESS SUMMARY - Annual Amount: Difference of Beefy R
+    //       otherMaterialsCost: 105953161,
+    //       // Utility - Annual Amount- Std Power
+    //       powerUsage: 3116542,
+    //       // Utility - Annual Amount - Steam
+    //       steamUsage: 35198,
+    //       // Utility - Annual Amount - Cooling Water
+    //       coolingWaterUsage: 1264953,
+    //       // Utility -  Annual Amount - Chilled Water
+    //       chilledWaterUsage: 110527,
+    //       // 10. ANNUAL OPERATING COST (2021 prices) - PROCESS SUMMARY - Consumables - $
+    //       consumableCosts: 246000,
+    //       // 10. ANNUAL OPERATING COST (2021 prices) - PROCESS SUMMARY - Waste Treatment/Disposal - $
+    //       wasteTreatmentCost: 3034000,
+
+    //       facilityCosts: 59461000,
+    //     },
+    //   },
+    //   "26h": {
+    //     "100gpl": {},
+    //   },
+    //   "29h": {
+    //     "100gpl": {},
+    //   },
+    // },
   },
 ];
 
@@ -86,10 +150,22 @@ export function calculateExpenses(
   const otherMaterials = bioreactor.otherMaterialsCost;
   const labor = (1 + costs.laborCost / 100) * bioreactor.baseLaborCost;
   const waste = bioreactor.wasteTreatmentCost;
+  //  ! Change the below facility to otherFacilityCosts
   const facility = bioreactor.facilityCosts;
   const consumables = bioreactor.consumableCosts;
   const operatingExpenses =
     media + otherMaterials + labor + waste + facility + consumables + utilities;
+
+  // ! The below calc is the operating expense with deprecation (but depreciation has to be in $ and not a ratio so change that below!)
+    // const operatingExpenses =
+    //   media +
+    //   otherMaterials +
+    //   labor +
+    //   waste +
+    //   facility +
+    //   consumables +
+    //   utilities +
+    //   bioreactor.depreciation;
 
   // Capital expense
   const capitalExpense = bioreactor.capitalExpense;

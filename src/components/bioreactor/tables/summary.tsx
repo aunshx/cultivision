@@ -5,66 +5,65 @@ import cn from "classnames";
 import TableDownloadButton from "@/components/bioreactor/tables/download-button"; 
 import Title from "@/components/title";
 
-interface MetricsTableProps {
+interface SummaryTableProps {
   expenses: CalculatedExpenses;
 }
 
-const MetricsTable = ({ expenses }: MetricsTableProps) => {
-  const formatNumber = (num: number): string => {
-    return num.toLocaleString();
-  };
+const formatNumber = (num: number, fixed=1): string => {
+  return num.toLocaleString(undefined, { maximumFractionDigits: fixed });
+};
 
-  const formatCurrency = (num: number, decimals = 2): string => {
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-      minimumFractionDigits: decimals,
-      maximumFractionDigits: decimals,
-    }).format(num);
-  };
+const SummaryTable = ({ expenses }: SummaryTableProps) => {
+
 
   const metrics = [
     {
       name: "Annual Production",
-      value: formatNumber(expenses.annualProduction),
+      value: formatNumber(expenses.annualProduction, 2),
+      combinedValue: formatNumber(
+        expenses.annualProduction * expenses.facilitiesNeeded, 2
+      ),
       unit: "kg/yr",
     },
     {
-      name: "Facilities Needed for 100M kg/yr",
-      value: expenses.facilitiesNeeded.toFixed(0),
-      unit: "facilities",
-    },
-    {
       name: "Capital Expenses",
-      value: formatCurrency(expenses.capitalExpenses, 1),
-      unit: "million USD",
+      value: formatNumber(expenses.capitalExpenses),
+      combinedValue: formatNumber(
+        expenses.capitalExpenses * expenses.facilitiesNeeded
+      ),
+      unit: "million $",
     },
     {
       name: "Operating Expenses",
-      value: formatCurrency(expenses.operatingExpenses, 1),
-      unit: "million USD/yr",
+      value: formatNumber(expenses.operatingExpenses),
+      combinedValue: formatNumber(
+        expenses.operatingExpenses * expenses.facilitiesNeeded
+      ),
+      unit: "million $/yr",
     },
     {
       name: "COGS (with Depreciation)",
-      value: formatCurrency(expenses.cogsWithDepreciation, 2),
-      unit: "USD/kg",
+      value: expenses.cogsWithDepreciation.toFixed(2),
+      combinedValue: expenses.cogsWithDepreciation.toFixed(2),
+      unit: "$/kg",
     },
     {
       name: "COGS (without Depreciation)",
-      value: formatCurrency(expenses.cogsWithoutDepreciation, 2),
-      unit: "USD/kg",
+      value: expenses.cogsWithoutDepreciation.toFixed(2),
+      combinedValue: expenses.cogsWithoutDepreciation.toFixed(2),
+      unit: "$/kg",
     },
   ];
 
-  const headers = ["Metric", "Value", "Unit"];
-  const rows = metrics.map((m) => [m.name, m.value, m.unit]);
+  const headers = ["Metric", "Single Value", "25 Value", "Unit"];
+  const rows = metrics.map((m) => [m.name, m.value, m.combinedValue, m.unit]);
 
   return (
     <div className='h-full flex flex-col pb-2'>
       <div className='flex items-center justify-start gap-x-2 mb-4'>
-        <Title title={"Performance Metrics"} />
+        <Title title={"Executive Summary"} />
         <TableDownloadButton
-          filename='performance-metrics.csv'
+          filename='executive-summary.csv'
           headers={headers}
           rows={rows}
         />
@@ -87,7 +86,13 @@ const MetricsTable = ({ expenses }: MetricsTableProps) => {
                 scope='col'
                 className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
               >
-                Value
+                Single Facility
+              </th>
+              <th
+                scope='col'
+                className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
+              >
+                {expenses.facilitiesNeeded}* Facilities
               </th>
               <th
                 scope='col'
@@ -113,6 +118,9 @@ const MetricsTable = ({ expenses }: MetricsTableProps) => {
                 <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium'>
                   {metric.value}
                 </td>
+                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium'>
+                  {metric.combinedValue}
+                </td>
                 <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
                   {metric.unit}
                 </td>
@@ -122,13 +130,14 @@ const MetricsTable = ({ expenses }: MetricsTableProps) => {
         </table>
       </div>
 
-      <div className="border-t border-gray-400 mx-4 my-4"/> 
+      <div className='border-t border-gray-400 mx-4 my-4' />
 
       <div className='text-sm text-gray-500 px-4'>
         <div className='font-medium mb-1'>Notes:</div>
         <ul className='list-disc pl-5 space-y-1'>
           <li>COGS = Cost of Goods Sold</li>
-          <li>Capital expenses are reported in millions of USD</li>
+          <li>*Value summary of number of facilities required to produce approximately 100M kg/yr</li>
+          <li>Capital expenses are reported in millions of $</li>
           <li>All calculations based on provided cost parameters</li>
         </ul>
       </div>
@@ -136,4 +145,4 @@ const MetricsTable = ({ expenses }: MetricsTableProps) => {
   );
 };
 
-export default MetricsTable;
+export default SummaryTable;
