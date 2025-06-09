@@ -16,7 +16,7 @@ export const bioreactors: Bioreactor[] = [
     mediaVolume: 40732424,
     facilityCosts: 77202000,
     otherMaterialsCost: 2519278,
-    // TODO: Change the below from a ratio to the cost directly as given in the csv 
+    // TODO: Change the below from a ratio to the cost directly as given in the csv
     depreciation: 5.14,
 
     baseLaborCost: 722 * 34.5 + 24076 * 46.0 + 261 * 57.5,
@@ -64,17 +64,60 @@ export const bioreactors: Bioreactor[] = [
     image: "/images/260K_ALR.png",
     annualProduction: 25000000,
     mediaVolume: 253758783,
-    baseLaborCost: 2756 * 34.5 + 20353 * 46.0 + 261 * 57.5,
     otherMaterialsCost: 5464682,
-    wasteTreatmentCost: 3034484,
-    facilityCosts: 59461000,
-    consumableCosts: 246000,
     powerUsage: 3116542,
     steamUsage: 27232,
     coolingWaterUsage: 1263320,
     chilledWaterUsage: 110527,
+    consumableCosts: 246000,
+    wasteTreatmentCost: 3034484,
+    facilityCosts: 59461000,
+
+    baseLaborCost: 2756 * 34.5 + 20353 * 46.0 + 261 * 57.5,
+
     capitalExpense: 365900000,
+
     depreciation: 1.2,
+    // reactors: {
+    //   "17h": {
+    //     "100gpl": {},
+    //   },
+    //   "20h": {
+    //     "100gpl": {},
+    //   },
+    //   "23h": {
+    //     "100gpl": {
+    //       // Executive Summary - Cost Basis Annual Rate
+    //       annualProduction: 25000000,
+    //       // Executive Summary - Total Capital Investment
+    //       capitalExpense: 345079000,
+    //       // 5. MATERIALS COST - PROCESS SUMMARY - Annual Amount - Beefy R Enhance (MEDIA COST - Part of Cost Parameters)
+    //       mediaVolume: 253758783,
+    //       // MATERIALS COST - PROCESS SUMMARY - Annual Amount: Difference of Beefy R
+    //       otherMaterialsCost: 105953161,
+    //       // Utility - Annual Amount- Std Power
+    //       powerUsage: 3116542,
+    //       // Utility - Annual Amount - Steam
+    //       steamUsage: 35198,
+    //       // Utility - Annual Amount - Cooling Water
+    //       coolingWaterUsage: 1264953,
+    //       // Utility -  Annual Amount - Chilled Water
+    //       chilledWaterUsage: 110527,
+    //       // 10. ANNUAL OPERATING COST (2021 prices) - PROCESS SUMMARY - Consumables - $
+    //       consumableCosts: 246000,
+    //       // 10. ANNUAL OPERATING COST (2021 prices) - PROCESS SUMMARY - Waste Treatment/Disposal - $
+    //       wasteTreatmentCost: 3034000,
+
+    //       facilityCosts: 59461000,
+    //     },
+    //   },
+    //   "26h": {
+    //     "100gpl": {},
+    //   },
+    //   "29h": {
+    //     "100gpl": {},
+    //   },
+    // },
   },
 ];
 
